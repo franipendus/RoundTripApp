@@ -25,26 +25,27 @@ CREATE TABLE IF NOT EXISTS countries
     currency       VARCHAR(255)        NOT NULL,
     population     INTEGER             NOT NULL,
     capital        VARCHAR(255)        NOT NULL,
-    gdp            FLOAT               NOT NULL,
+    language       VARCHAR(255)        NOT NULL,
 
     PRIMARY KEY (name)
 );
 
-CREATE TABLE `gdp`
+DROP TABLE IF EXISTS gdp;
+CREATE TABLE gdp
 (
     num     BIGINT        NOT NULL,
-    country VARCHAR(1024) NOT NULL,
+    country VARCHAR(50) NOT NULL,
     gdp     DOUBLE        NOT NULL,
     quarter VARCHAR(1024) NOT NULL,
 
-    PRIMARY KEY (country)
+    PRIMARY KEY (num)
 );
 
 DROP TABLE IF EXISTS exchangeRates;
 CREATE TABLE IF NOT EXISTS exchangeRates
 (
-    name_to       VARCHAR(255) UNIQUE NOT NULL,
-    name_from     VARCHAR(255) UNIQUE NOT NULL,
+    name_to       VARCHAR(255)  NOT NULL,
+    name_from     VARCHAR(255)  NOT NULL,
     exchange_rate FLOAT               NOT NULL,
 
     PRIMARY KEY (name_to, name_from),
@@ -71,7 +72,7 @@ DROP TABLE IF EXISTS airlines;
 CREATE TABLE IF NOT EXISTS airlines
 (
     name VARCHAR(255) UNIQUE NOT NULL,
-    url  VARCHAR(255)        NOT NULL,
+    url  VARCHAR(500)        NOT NULL,
 
     PRIMARY KEY (name)
 );
@@ -215,9 +216,6 @@ CREATE TABLE IF NOT EXISTS dealInfo
         ON DELETE cascade,
     FOREIGN KEY (hotel_id) REFERENCES hotels (id)
         ON UPDATE cascade
-        ON DELETE cascade,
-    FOREIGN KEY (hotel_name) REFERENCES hotels (name)
-        ON UPDATE cascade
         ON DELETE cascade
 );
 
@@ -300,5 +298,3 @@ CREATE TABLE hotelStats (
 
     PRIMARY KEY (num)
 );
-
-
