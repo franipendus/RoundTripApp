@@ -2686,18 +2686,38 @@ VALUES
 
 
 -- adInfo data
-INSERT INTO `adInfo` (`id`,`date`,`advertiser_id`,`clicks`,`price`, image_name)
-VALUES
-(1,'2023-01-12',4,188,74.04, 'google.png'),
-(2,'2022-11-26',3,132,92.32, 'apple.png'),
-(3,'2020-05-06',5,125,55.82, 'mcD.png'),
-(4,'2023-10-13',1,25,74.98, 'amazon.png'),
-(5,'2020-07-20',3,263,74.75, 'trip.png'),
-(6,'2022-09-24',5,228,85.93, 'google.png'),
-(7,'2022-03-13',1,252,50.38, 'apple.png'),
-(8,'2023-09-11',5,154,50.83, 'mcD.png'),
-(9,'2024-02-29',3,80,57.46, 'amazon.png'),
-(10,'2021-08-16',3,299,83.81, 'trip.png');
+INSERT INTO `adInfo` (`id`, `date`, `advertiser_id`, `description`, `price`, 'title')
+VALUES (1, '2023-01-12', 4,
+        'Unlock a world of information with Google Search. Find answers, explore new topics, and stay updated on the latest trends. Google - Your window to the world.',
+        74.04, 'Discover Everything with Google Search')
+        ,
+       (2, '2022-11-26', 3,
+        'Experience the future with Apple products. From sleek iPhones to powerful MacBooks, discover the seamless integration of technology and design. Upgrade your tech game with Apple today.',
+        92.32, 'Innovation at Your Fingertips: Apple'),
+       (3, '2020-05-06', 5,
+        'Craving something tasty? Head to McDonalds for your favorite burgers, fries, and more. Quality ingredients, delicious meals, and a place for the whole family.',
+        55.82, 'Taste the Difference at McDonalds'),
+       (4, '2023-10-13', 1,
+        'Shop a vast selection of products on Amazon. Enjoy quick delivery, customer reviews, and great prices on everything from electronics to everyday essentials. Experience the convenience of Amazon shopping.',
+        74.98, 'Your One-Stop Shop: Amazon'),
+       (5, '2020-07-20', 3,
+        'Make every journey memorable with TripAdvisor. Read real reviews, compare prices, and book the best hotels, flights, and activities. Your ultimate travel companion - TripAdvisor.',
+        74.75, 'Travel Better with TripAdvisor'),
+       (6, '2022-09-24', 5,
+        'Search smarter with Google. Whether it''s the latest news, how-to guides, or in-depth research, Google Search connects you to the information you need. Start your search journey today.',
+        85.93, 'Explore More with Google Search'),
+       (7, '2022-03-13', 1,
+        'Discover the latest in technology with Apple. From iPhones and iPads to Macs and Apple Watch, elevate your digital life with cutting-edge design and unparalleled performance. Join the Apple ecosystem today.',
+        50.38, 'Experience Innovation with Apple'),
+       (8, '2023-09-11', 5,
+        'Indulge in your favorite meals and snacks at McDonalds. From our classic Big Mac to fresh salads and coffee, there is something for everyone. Visit us today for delicious, affordable fast food.',
+        50.83, 'Savor the Flavor at McDonalds'),
+       (9, '2024-02-29', 3,
+        'Discover millions of products at unbeatable prices on Amazon. Fast shipping, great deals, and top-rated customer service. Start your shopping journey today with Amazon.',
+        57.46, 'Shop Smart, Shop Amazon'),
+       (10, '2021-08-16', 3,
+        'Explore the world with confidence using TripAdvisor. Find the best hotels, restaurants, and attractions with millions of reviews from travelers like you. Make every trip unforgettable with TripAdvisor.',
+        83.81, 'Plan Your Perfect Trip with TripAdvisor');
 
 
 -- adImpressions data

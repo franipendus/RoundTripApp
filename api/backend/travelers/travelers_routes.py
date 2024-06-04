@@ -34,16 +34,18 @@ where hotels.id = t3.hi AND t3.i = {traveler_id}""")
     the_response.mimetype = 'application/json'
     return the_response
 
-@travelers.route('/travelers/hotelbook/<sdate>/<edate>/<hotel_id>', methods=['PUT'])
-def add_favHotels(hotel_id, start_date, end_date):
-    current_app.logger.info('PUT /travelers/hotelbook/<sdate>/<edate>/<hotel_id>')
-    hotelBookings = request.json
+@travelers.route('/travelers/trips/<sdate>/<edate>/<trip_id>', methods=['PUT'])
+def update_trips():
+    current_app.logger.info('PUT /travelers/trips/<sdate>/<edate>/<trip_id>')
+    trips = request.json
     # current_app.logger.info(cust_info)
-    #s = hotelBookings['start']
-   #e = hotelBookings['end']
+    s = trips['start_date']
+    e = trips['end_date']
+    ti = trips['id']
+    
 
-    query = 'update hotelBookings SET start = %s, end = %s where hotel_id = %s'
-    data = (start_date, end_date)
+    query = 'update trips SET start_date = %s, end_date = %s where trip_id = %s'
+    data = (s, e, ti)
     cursor = db.get_db().cursor()
     r = cursor.execute(query, data)
     db.get_db().commit()
