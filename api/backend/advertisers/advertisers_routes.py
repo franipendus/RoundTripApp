@@ -72,7 +72,7 @@ def get_adImpsTrav(traveler_id):
     cursor = db.get_db().cursor()
     cursor.execute(f"""select adImpressions.date as 'Date Interacted', 
                    title as 'Title', description as 'Description' 
-       from adImpressions JOIN adInfo where adImpressions.ad_id = adInfo.id AND traveler_id = {traveler_id}""") 
+       from adImpressions JOIN adInfo ON adImpressions.ad_id = adInfo.id WHERE traveler_id = {traveler_id}""") 
 
     row_headers = [x[0] for x in cursor.description]
     json_data = []

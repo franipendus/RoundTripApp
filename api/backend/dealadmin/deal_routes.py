@@ -27,13 +27,13 @@ def get_ads(dealadmin_id):
     return the_response
 
 
-@dealadmin.route('/dealadmin/dealinfospecific/<deal_id>', methods=['GET'])
-def get_ad_specific(deal_id):
-    current_app.logger.info('deal_routes.py: GET /dealadmin/dealinfospecific/<deal_id>')
+@dealadmin.route('/dealadmin/dealinfospecific/<hotel_id>', methods=['GET'])
+def get_ad_specific(hotel_id):
+    current_app.logger.info('deal_routes.py: GET /dealadmin/dealinfospecific/<hotel_id>')
    
     cursor = db.get_db().cursor()
     cursor.execute(f"""select date as 'Date', hotel_name as 'Hotel Name', description as 'Description'
-                   from dealInfo where id = {deal_id}""") 
+                   from dealInfo JOIN hotels ON dealInfo.hotel_id = hotels.id where hotels.id = {hotel_id}""") 
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -72,7 +72,7 @@ def get_adImpsTrav(traveler_id):
     cursor = db.get_db().cursor()
     cursor.execute(f"""select dealImpressions.date as 'Date Interacted', 
                    hotel_name as 'Hotel Name', description as 'Description' 
-       from dealImpressions JOIN dealInfo where dealImpressions.deal_id = dealInfo.id AND traveler_id = {traveler_id}""") 
+       from dealImpressions JOIN dealInfo on dealImpressions.deal_id = dealInfo.id where traveler_id = {traveler_id}""") 
 
     row_headers = [x[0] for x in cursor.description]
     json_data = []

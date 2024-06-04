@@ -19,10 +19,10 @@ def get_trips(traveler_id):
 (select fn,origin_airport as oa, destination_airport as da, sd, ed, hotel_id as hi, i  from hotelBookings JOIN
 (select flight_number as fn, sd, ed, i from flightBookings JOIN
  (select trips.id as i, start_date as sd, end_date as ed, traveler_id
-         from trips JOIN travelers where travelers.id = trips.traveler_id
+         from trips JOIN travelers ON travelers.id = trips.traveler_id
       ) as t
-where t.i = flightBookings.trip_id) as t2 JOIN flights
-where t2.fn = flights.number AND t2.i = hotelBookings.trip_id) as t3 JOIN airports
+ON t.i = flightBookings.trip_id) as t2 JOIN flights
+ON t2.fn = flights.number AND t2.i = hotelBookings.trip_id) as t3 JOIN airports
 where hotels.id = t3.hi AND t3.i = {traveler_id}""") 
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -79,7 +79,7 @@ def get_promos(city):
                    dealInfo.name as 'Deal Information',dealInfo.description as 'Deal Description', 
                    amenities as 'Amentities', city as 'City'
 from dealInfo Join hotels
-where hotels.id = dealInfo.hotel_id and city = '{city}'""")
+ON hotels.id = dealInfo.hotel_id WHERE city = '{city}'""")
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -103,8 +103,8 @@ def get_favHotels(city, traveler_id):
     street_number as 'Street Number',
     street        as 'Street' from hotels 
                     JOIN favHotels JOIN travelers 
-                   where favHotels.hotel_id = hotels.id 
-                   AND hotels.city = '{city}'
+                   ON favHotels.hotel_id = hotels.id 
+                   WHERE hotels.city = '{city}'
                     AND favHotels.traveler_id = '{traveler_id}'""")
     row_headers = [x[0] for x in cursor.description]
     json_data = []
