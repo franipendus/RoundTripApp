@@ -13,13 +13,13 @@ ad_id = st.number_input('Ad ID', min_value=1, max_value=10, value=1,
 if st.button("Delete", 
             type='primary', 
             use_container_width=True):
-    url = f'http://api:4000//advertisers/adinfo/{ad_id}'
+    url = f'http://api:4000/a/advertisers/adinfo/{ad_id}'
     response = requests.delete(url)
     
     if response.status_code == 200 or response.status_code == 204:
         st.write('Ad deleted successfully!')
     else:
         st.write(f'Delete failed :( {response.status_code}')
-
+    
 if st.button('Return home'):
     st.switch_page('pages/10_Advertiser_Home.py')

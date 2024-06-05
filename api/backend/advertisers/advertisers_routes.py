@@ -101,7 +101,7 @@ def add_new_ad():
     if max_id is None:
         max_id = 0
     id = max_id + 1
-    
+
     date = the_data['date']
     adver_id = the_data['adver_id']
     description = the_data['description']
@@ -133,13 +133,9 @@ def delete_ad(ad_id):
     cursor = db.get_db().cursor()
     
     # Execute the DELETE statement
-    cursor.execute(f"DELETE FROM adInfo WHERE id = {ad_id}") 
-    if response.status_code == 200  or response.status_code == 204:
-        response = jsonify({'error': 'Ad not found'})
-    else:
-        db.commit()
-        response = jsonify({'message': 'Ad deleted successfully'})
-        response.status_code = 200
+    response = cursor.execute(f"DELETE FROM adInfo WHERE id = {ad_id}") 
+    db.get_db().commit()
     
+    return response
 
 
