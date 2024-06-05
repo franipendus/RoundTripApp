@@ -34,16 +34,15 @@ where  hotels.id = t3.hi AND t3.ti = {traveler_id}""")
     the_response.mimetype = 'application/json'
     return the_response
 
-@travelers.route('/travelers/trips/<sdate>/<edate>/<trip_id>', methods=['PUT'])
+@travelers.route('/travelers/trips', methods=['PUT'])
 def update_trips():
-    current_app.logger.info('PUT /travelers/trips/<sdate>/<edate>/<trip_id>')
+    current_app.logger.info('PUT /travelers/trips')
     trips = request.json
     # current_app.logger.info(cust_info)
-    s = trips['start_date']
-    e = trips['end_date']
-    ti = trips['id']
+    s = trips['s']
+    e = trips['e']
+    ti = trips['ti']
     
-
     query = 'update trips SET start_date = %s, end_date = %s where trip_id = %s'
     data = (s, e, ti)
     cursor = db.get_db().cursor()

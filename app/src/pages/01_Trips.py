@@ -45,10 +45,16 @@ sdate = st.date_input('Start Date',
 edate = st.date_input('End Date',            
                     label_visibility="visible")
 
+stuff = {'s': sdate.strftime('%H:%M:%D'), 'e': edate.strftime('%H:%M:%D'), 'ti' : trip_id}
 if st.button("Submit", 
             type = 'primary', 
             use_container_width=True):
-        results = requests.put(f'http://api:4000/t/travelers/trips/{sdate}/{edate}/{trip_id}').json()
+        results = requests.put(f'http://api:4000/t/travelers/trips', json = stuff)
+        
+        if results.status_code == 200 or results.status_code == 201:
+                st.write('Trip updated!')
+        else : st.write('Update failed :( Status Code = ' + str(results.status_code))   
+            
 
 #st.table(results)
 

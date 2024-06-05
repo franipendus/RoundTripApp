@@ -15,9 +15,10 @@ st.write('')
 st.write("### About")
 st.write("As a traveler, you can:")
 
-st.markdown("- plan/update a trip ")
+st.markdown("- view/update a trip ")
 st.markdown("- view country information")
 st.markdown("- view hotel promotions")
+st.markdown("- view hotel and flight cost predictions")
   
 st.write('#### Use the side bar to chose what you would like to do today')
 

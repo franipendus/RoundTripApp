@@ -9,9 +9,14 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('System Admin Home Page')
+st.title(f"Welcome Deal Administrator, {st.session_state['first_name']}.")
+st.write('')
+st.write('')
+st.write("### About")
+st.write("As a Deal Administrator, you can:")
 
-if st.button('Update ML Models', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/21_ML_Model_Mgmt.py')
+st.markdown("- view your deals")
+st.markdown("- view deal impressions")
+st.markdown("- post/delete a deal")
+  
+st.write('#### Use the side bar to chose what you would like to do today')
