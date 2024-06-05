@@ -9,7 +9,7 @@ from backend.products.products_routes import products
 from backend.travelers.travelers_routes import travelers
 from backend.advertisers.advertisers_routes import advertisers
 from backend.dealadmin.deal_routes import dealadmin
-from backend.ml_models.model_routes import ml_models
+#from backend.ml_models.model_routes import ml_models
 import os
 from dotenv import load_dotenv
 
@@ -69,7 +69,7 @@ def create_app():
     app.register_blueprint(travelers,    url_prefix='/t')
     app.register_blueprint(advertisers,    url_prefix='/a')
     app.register_blueprint(dealadmin,    url_prefix='/d')
-    app.register_blueprint(ml_models,    url_prefix='/p')
+    #app.register_blueprint(ml_models,    url_prefix='/p')
 
     # Don't forget to return the app object
     return app
