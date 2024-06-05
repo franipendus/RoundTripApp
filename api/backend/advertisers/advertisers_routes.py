@@ -96,7 +96,12 @@ def add_new_ad():
 
     #extracting the variable
     cursor = db.get_db().cursor()
-    id = cursor.execute(f"""select MAX(id) from adInfo""") + 1
+    cursor.execute("SELECT MAX(id) FROM adInfo")
+    max_id = cursor.fetchone()[0]
+    if max_id is None:
+        max_id = 0
+    id = max_id + 1
+    
     date = the_data['date']
     adver_id = the_data['adver_id']
     description = the_data['description']

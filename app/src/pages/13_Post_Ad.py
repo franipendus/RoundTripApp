@@ -20,11 +20,17 @@ price = st.number_input('Price', min_value=0.0, max_value=250.0,
 title = st.text_input('Ad Title',           
                     label_visibility="visible")
 
-info = {'date': date, 'adver_id' : adver_id, 'description': description, 'price' : price, 'title' : title}
+info = {
+    'date': date.strftime('%Y-%m-%d'),  
+    'adver_id': adver_id,
+    'description': description,
+    'price': price,
+    'title': title
+}
 url = f'http://api:4000/a/advertisers/adinfo'
 
 if st.button('Submit'):
-    res = requests.post(url, data = info)
+    res = requests.post(url, json=info)
     if res.status_code == requests.codes.ok:
         st.write('Ad added!')
     print(res.text)
