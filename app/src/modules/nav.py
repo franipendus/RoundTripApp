@@ -22,6 +22,9 @@ def CountriesNav():
 def PromosNav():
     st.sidebar.page_link("pages/03_Promotions.py", label="Promotions", icon='💲')
 
+def CostPred():
+    st.sidebar.page_link("pages/04_Prediction.py", label="Predictions", icon='🔮')
+
 ## ------------------------ Examples for Role of advertisers ------------------------
 def AdInfoNav():
     st.sidebar.page_link("pages/11_Ad_Information.py", label="Ad Information", icon='📢')
@@ -63,6 +66,7 @@ def SideBarLinks(show_home=False):
            TripsNav()
            CountriesNav()
            PromosNav()
+           CostPred()
 
         # If the user role is an advertiser
         if st.session_state['role'] == 'advertiser':
