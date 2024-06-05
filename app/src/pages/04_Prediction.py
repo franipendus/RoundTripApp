@@ -47,7 +47,7 @@ logger.info(f'var_02 = {var_02}')
 if st.button('Calculate Prediction',
              type='primary',
              use_container_width=True):
-  results = requests.get(f'http://api:4000/c/prediction/{var_01}/{var_02}/{var_03}/{var_04}/{var_05}').json()
+  results = requests.get(f'http://api:4000/p/prediction/{var_01}/{var_02}/{var_03}/{var_04}/{var_05}').json()
   st.dataframe(results)
 
 
