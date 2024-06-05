@@ -39,16 +39,16 @@ def update_trips():
     current_app.logger.info('PUT /travelers/trips')
     trips = request.json
     # current_app.logger.info(cust_info)
-    s = trips['s']
-    e = trips['e']
-    ti = trips['ti']
+    start = trips['s']
+    end = trips['e']
+    tripId = trips['ti']
     
-    query = 'update trips SET start_date = %s, end_date = %s where trip_id = %s'
-    data = (s, e, ti)
+    query = f"""update trips SET start_date = '{start}', end_date = '{end}' where id = {tripId}"""
+   
     cursor = db.get_db().cursor()
-    r = cursor.execute(query, data)
+    cursor.execute(query)
     db.get_db().commit()
-    return 'Hotel Bookings updated!'
+    return 'Trips updated!'
 
 # Get customer detail for customer with particular userID
 @travelers.route('/travelers/countries/<country>', methods=['GET'])

@@ -45,7 +45,7 @@ sdate = st.date_input('Start Date',
 edate = st.date_input('End Date',            
                     label_visibility="visible")
 
-stuff = {'s': sdate.strftime('%H:%M:%D'), 'e': edate.strftime('%H:%M:%D'), 'ti' : trip_id}
+stuff = {'s': str(sdate), 'e': str(edate), 'ti' : str(trip_id)}
 if st.button("Submit", 
             type = 'primary', 
             use_container_width=True):

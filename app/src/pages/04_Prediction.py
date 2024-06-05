@@ -20,12 +20,11 @@ col1, col2, col3, col4, col5 = st.columns(5)
 
 # add one number input for variable 1 into column 1 flight price
 with col1:
-  var_01 = st.number_input('Flight Price:',
-                           step=1)
+  var_01 = st.number_input('Flight Price:',  min_value=0.0)
 
 # add another number input for variable 2 into column 2 hotel rating
 with col2:
-  var_02 = st.number_input('Hotel Rating:',
+  var_02 = st.number_input('Hotel Rating:',  min_value=1, max_value=5, value= 1, 
                            step=1)
   
 # add another number input for variable 3 into column 3 origin city
@@ -54,7 +53,10 @@ if st.button('Calculate Prediction',
   results = requests.get(query)
   logger.info(f'results = {results}')
   
-  st.dataframe(results.json()) 
+  st.write('### Predicted hotel cost:')
+  st.metric("cost per night", results.json(), delta=None, delta_color="normal", help=None, label_visibility="visible")
+
+  #st.dataframe(results.json()) 
 
 
 
