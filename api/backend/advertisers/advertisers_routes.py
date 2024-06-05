@@ -109,17 +109,25 @@ def add_new_ad():
     title = the_data['title']
 
     # Constructing the query
-    query = 'insert into adInfo (id, date, advertiser_id, description, price, title) values ("'
-    query += id + '", "'
-    query += date + '", "'
-    query += adver_id + '", '
-    query += description + '", '
-    query += price + '", '
-    query += title + ')'
-    current_app.logger.info(query)
+    # query = f""" insert into adInfo (id, date, advertiser_id, description, price, title)
+    # values ({id}, {date}, {adver_id}, {description}, {price}, {title}) """
+    # query += date + '", "'
+    # query += str(adver_id) + '", '
+    # query += description + '", '
+    # query += str(price) + '", '
+    # query += title + ')'
+    # current_app.logger.info(query)
+
+    # query = '''INSERT INTO adInfo (id, date, advertiser_id, description, price, title) 
+    #            VALUES (?, ?, ?, ?, ?, ?)'''
+    # values = (id, date, adver_id, description, price, title)
+
+    query = f"""INSERT INTO adInfo (id, date, advertiser_id, description, price, title) 
+               VALUES ({id}, '{str(date)}', {adver_id}, '{description}', {price}, '{title}')"""
 
     # executing and committing the insert statement 
     cursor = db.get_db().cursor()
+    #cursor.execute(query, values)
     cursor.execute(query)
     db.get_db().commit()
     
@@ -133,9 +141,10 @@ def delete_ad(ad_id):
     cursor = db.get_db().cursor()
     
     # Execute the DELETE statement
-    response = cursor.execute(f"DELETE FROM adInfo WHERE id = {ad_id}") 
+    cursor.execute(f"DELETE FROM adInfo WHERE id = {ad_id}") 
+    
     db.get_db().commit()
     
-    return response
+    return "success"
 
 

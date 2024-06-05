@@ -30,7 +30,7 @@ def predict(var01, var02, var03, var04, var05):
   # get a database cursor 
   cursor = db.get_db().cursor()
   # get the model params from the database
-  query = 'SELECT beta_vals FROM model1_params ORDER BY sequence_number DESC LIMIT 1'
+  query = 'SELECT beta_vals FROM main_df ORDER BY sequence_number DESC LIMIT 1'
   cursor.execute(query)
   return_val = cursor.fetchone()
 
@@ -96,7 +96,7 @@ def get_m1(v1,v2, v3, v4, v5):
     cursor = db.get_db().cursor()
     
     # Execute the DELETE statement
-    response = predict() 
+    response = predict(v1, v2, v3, v4, v5) 
     
     return response
 

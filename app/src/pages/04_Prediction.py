@@ -4,6 +4,8 @@ logger = logging.getLogger()
 import streamlit as st
 from modules.nav import SideBarLinks
 import requests
+import logging
+logger = logging.getLogger()
 
 st.set_page_config(layout = 'wide')
 
@@ -47,8 +49,12 @@ logger.info(f'var_02 = {var_02}')
 if st.button('Calculate Prediction',
              type='primary',
              use_container_width=True):
-  results = requests.get(f'http://api:4000/p/prediction/{var_01}/{var_02}/{var_03}/{var_04}/{var_05}').json()
-  st.dataframe(results)
+  query = f'http://api:4000/p/ml_models/1/{var_01}/{var_02}/{var_03}/{var_04}/{var_05}'
+  logger.info(f'query = {query}')
+  results = requests.get(query)
+  logger.info(f'results = {results}')
+  
+  st.dataframe(results.json()) 
 
 
 

@@ -64,29 +64,6 @@ We advise: Use some caution when travelling Italy.','euro', 58850717, 'Rome', 'I
 We advise: Use some caution when travelling France.','euro', 68373433, 'Paris', 'French');
 
 
--- exchange rates data
-INSERT INTO `exchangeRates` VALUES
-('France', 'United Kingdom', 1.17),
-('France', 'Spain', 1.0),
-('France', 'Italy', 1.0),
-('France', 'Germany', 1.0),
-('Italy', 'United Kingdom', 1.17),
-('Italy', 'Spain', 1.0),
-('Italy', 'France', 1.0),
-('Italy', 'Germany', 1.0),
-('Germany', 'United Kingdom', 1.17),
-('Germany', 'Spain', 1.0),
-('Germany', 'France', 1.0),
-('Germany', 'Italy', 1.0),
-('Spain', 'United Kingdom', 1.17),
-('Spain', 'Germany', 1.0),
-('Spain', 'France', 1.0),
-('Spain', 'Italy', 1.0),
-('United Kingdom', 'France', 0.85),
-('United Kingdom', 'Italy', 0.85),
-('United Kingdom', 'Germany', 0.85),
-('United Kingdom', 'Spain', 0.85);
-
 
 -- airports data
 INSERT INTO `airports` VALUES ('LHR','London Heathrow Airport', 'London', 'United Kingdom'),
@@ -2663,11 +2640,10 @@ VALUES
 
 
 -- adInfo data
-INSERT INTO `adInfo` (`id`, `date`, `advertiser_id`, `description`, `price`, 'title')
+INSERT INTO `adInfo` (`id`, `date`, `advertiser_id`, `description`, `price`, `title`)
 VALUES (1, '2023-01-12', 4,
         'Unlock a world of information with Google Search. Find answers, explore new topics, and stay updated on the latest trends. Google - Your window to the world.',
-        74.04, 'Discover Everything with Google Search')
-        ,
+        74.04, 'Discover Everything with Google Search'),
        (2, '2022-11-26', 3,
         'Experience the future with Apple products. From sleek iPhones to powerful MacBooks, discover the seamless integration of technology and design. Upgrade your tech game with Apple today.',
         92.32, 'Innovation at Your Fingertips: Apple'),
