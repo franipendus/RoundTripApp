@@ -6,6 +6,7 @@ from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
 import requests
 
+st.write("### Post a deal:")
 
 adver_id = st.selectbox('Advertiser Id', 
                        options= (1, 2, 3, 4, 5),                  
