@@ -37,14 +37,18 @@ city = st.selectbox('City',
 results = requests.get(f'http://api:4000/t/travelers/favhotels/{city}/{num}').json()
 st.table(results)
 
-st.write("### Update a hotel booking:")
-hotel_id = st.number_input('Hotel ID', min_value=1, max_value=20, value= 1,                  
+st.write("### Update a trip:")
+trip_id = st.number_input('Trip ID', min_value=1, max_value=250, value= 1,                  
                     label_visibility="visible")
 sdate = st.date_input('Start Date',                  
                     label_visibility="visible")
 edate = st.date_input('End Date',            
                     label_visibility="visible")
 
-results = requests.get(f'http://api:4000/t/travelers/hotelbook/<sdate>/<edate>/<hotel_id>').json()
-st.table(results)
+if st.button("Submit", 
+            type = 'primary', 
+            use_container_width=True):
+        results = requests.put(f'http://api:4000/t/travelers/trips/{sdate}/{edate}/{trip_id}').json()
+
+#st.table(results)
 

@@ -6,21 +6,16 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('App Administration Page')
+st.title('Deal Impressions')
 
-st.write('\n\n')
-st.write('## Model 1 Maintenance')
+st.write("### Your deal impressions:")
+num = st.number_input('Deal Administrator ID', min_value=1, max_value=50, value= 1,                  
+                    label_visibility="visible")
+results = requests.get(f'http://api:4000/d/dealadmin/dealimps/{num}').json()
+st.table(results)
 
-st.button("Train Model 01", 
-            type = 'primary', 
-            use_container_width=True)
-
-st.button('Test Model 01', 
-            type = 'primary', 
-            use_container_width=True)
-
-if st.button('Model 1 - get predicted value for 10, 25', 
-             type = 'primary',
-             use_container_width=True):
-  results = requests.get('http://api:4000/c/prediction/10/25').json()
-  st.dataframe(results)
+st.write("### Want the information about a specific traveler's impressions?")
+num = st.number_input('Traveler ID', min_value=1, max_value=50, value= 1,                  
+                    label_visibility="visible")
+results = requests.get(f'http://api:4000/d/dealadmin/dealimps/trav/{num}').json()
+st.table(results)

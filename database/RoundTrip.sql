@@ -257,9 +257,9 @@ CREATE TABLE IF NOT EXISTS adInfo
     id            INTEGER UNIQUE NOT NULL,
     date          DATE           NOT NULL,
     advertiser_id INTEGER        NOT NULL,
-    clicks        INTEGER        NOT NULL,
+    description   VARCHAR(255)        NOT NULL,
     price         DECIMAL(2)     NOT NULL,
-    image_name    VARCHAR(255)   NOT NULL,
+    title         VARCHAR(255)   NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (advertiser_id) REFERENCES advertisers (id)
