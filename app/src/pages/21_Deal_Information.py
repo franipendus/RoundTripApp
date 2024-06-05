@@ -8,7 +8,6 @@ SideBarLinks()
 
 st.title('Deal Information')
 
-st.title('Ad Information')
 if st.button('Post a Deal'):
     st.switch_page('pages/23_Post_Deal.py')
 
