@@ -30,17 +30,6 @@ CREATE TABLE IF NOT EXISTS countries
     PRIMARY KEY (name)
 );
 
-DROP TABLE IF EXISTS gdp;
-CREATE TABLE gdp
-(
-    num     BIGINT        NOT NULL,
-    country VARCHAR(50) NOT NULL,
-    gdp     DOUBLE        NOT NULL,
-    quarter VARCHAR(1024) NOT NULL,
-
-    PRIMARY KEY (num)
-);
-
 DROP TABLE IF EXISTS exchangeRates;
 CREATE TABLE IF NOT EXISTS exchangeRates
 (
@@ -286,15 +275,17 @@ CREATE TABLE IF NOT EXISTS adImpressions
         ON DELETE cascade
 );
 
-DROP TABLE IF EXISTS hotelStats;
-CREATE TABLE hotelStats (
-  num BIGINT,
-  avg_price DOUBLE NOT NULL,
-  avg_rating DOUBLE NOT NULL,
-  month VARCHAR(1024) NOT NULL,
-  city VARCHAR(1024) NOT NULL,
-  country VARCHAR(1024) NOT NULL,
-  quarter VARCHAR(1024) NOT NULL,
-
+DROP TABLE IF EXISTS main_df;
+CREATE TABLE IF NOT EXISTS main_df
+(
+    num                 BIGINT,
+    city_orgin          VARCHAR(255),
+    city_destination    VARCHAR(255),
+    destination_country VARCHAR(255),
+    quarter             VARCHAR(255),
+    hotel_rating        DOUBLE,
+    hotel_price         DOUBLE,
+    flight_price        DOUBLE,
+    gdp                 DOUBLE,
     PRIMARY KEY (num)
 );
