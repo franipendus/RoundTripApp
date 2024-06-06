@@ -12,10 +12,9 @@ travelers = Blueprint('travelers', __name__)
 @travelers.route('/travelers/trips/<traveler_id>', methods=['GET'])
 def get_trips(traveler_id):
     current_app.logger.info('travelers_routes.py: GET /travelers/trips/<traveler_id>')
-   
     cursor = db.get_db().cursor()
-    cursor.execute(f"""select distinct sd as 'start date', ed as 'end date', oa as 'flight origin', da as 'flight destination',
-       hotels.name as 'hotel name' from hotels JOIN
+    cursor.execute(f"""select distinct i as 'Trip Id', sd as 'Start date', ed as 'End date', oa as 'Flight Origin', da as 'Flight Destination',
+       hotels.name as 'Hotel Name' from hotels JOIN
 (select fn,origin_airport as oa, destination_airport as da, sd, ed, hotel_id as hi, i, ti  from hotelBookings JOIN
 (select flight_number as fn, sd, ed, i, ti from flightBookings JOIN
  (select trips.id as i, start_date as sd, end_date as ed, traveler_id as ti
@@ -24,12 +23,12 @@ def get_trips(traveler_id):
 where t.i = flightBookings.trip_id) as t2 JOIN flights
 where t2.fn = flights.number AND t2.i = hotelBookings.trip_id) as t3 JOIN airports
 where  hotels.id = t3.hi AND t3.ti = {traveler_id}""") 
+    
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
+    
+    the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
@@ -55,15 +54,13 @@ def update_trips():
 def get_country(country):
     current_app.logger.info('GET /travelers/countries/<country> route')
     cursor = db.get_db().cursor()
-    cursor.execute("select * from countries where name = '{0}'".format(country))
+    cursor.execute(f"select * from countries where name = '{country}'")
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
     current_app.logger.info(f'theData = {theData}')
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    current_app.logger.info(f'json_data = {json_data}')
-    the_response = make_response(jsonify(json_data))
+    
+    the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
@@ -83,10 +80,8 @@ where hotels.id = dealInfo.hotel_id and city = '{city}'""")
     json_data = []
     theData = cursor.fetchall()
     current_app.logger.info(f'theData = {theData}')
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    current_app.logger.info(f'json_data = {json_data}')
-    the_response = make_response(jsonify(json_data))
+    
+    the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
@@ -109,10 +104,7 @@ def get_favHotels(city, traveler_id):
     json_data = []
     theData = cursor.fetchall()
     current_app.logger.info(f'theData = {theData}')
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    current_app.logger.info(f'json_data = {json_data}')
-    the_response = make_response(jsonify(json_data))
+    the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response

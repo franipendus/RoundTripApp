@@ -15,14 +15,13 @@ st.title('Deal Information')
 #     st.switch_page('pages/24_Delete_Deal.py')
 
 st.write("### Your deals:")
-num = st.number_input('Deal Administrator ID', min_value=1, max_value=50, value= 1,                  
-                    label_visibility="visible")
-results = requests.get(f'http://api:4000/d/dealadmin/deals/{num}').json()
+id = st.session_state['id']
+results = requests.get(f'http://api:4000/d/dealadmin/deals/{id}').json()
 st.table(results)
 
 
 st.write("### Want the deal information about a specific hotel?")
 num = st.number_input('Hotel ID', min_value=1, max_value=20, value= 1,                  
                     label_visibility="visible")
-results = requests.get(f'http://api:4000/d/dealadmin/dealinfospecific/{num}').json()
+results = requests.get(f'http://api:4000/d/dealadmin/dealinfospecific/{id}/{num}').json()
 st.table(results)

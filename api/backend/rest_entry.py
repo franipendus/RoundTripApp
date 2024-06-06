@@ -1,9 +1,10 @@
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 from flask import Flask
 
 from backend.db_connection import db
+# from backend.db_connection import db_json
 from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
 from backend.travelers.travelers_routes import travelers
@@ -37,6 +38,7 @@ def create_app():
 
     # Initialize the database object with the settings above. 
     db.init_app(app)
+    # db_json.init_app(app)
 
     # Add the default route
     # Can be accessed from a web browser
@@ -65,12 +67,11 @@ def create_app():
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
     app.register_blueprint(customers,   url_prefix='/c')
-    app.register_blueprint(products,    url_prefix='/p')
     app.register_blueprint(travelers,    url_prefix='/t')
     app.register_blueprint(advertisers,    url_prefix='/a')
     app.register_blueprint(dealadmin,    url_prefix='/d')
     app.register_blueprint(ml_models,    url_prefix='/p')
 
-    # Don't forget to return the app object
+    # returning the app object
     return app
 

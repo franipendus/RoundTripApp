@@ -18,14 +18,13 @@ if st.button('Delete an Ad'):
     st.switch_page('pages/14_Delete_Ad.py')
 
 st.write("### Your ads:")
-num = st.number_input('Advertiser ID', min_value=1, max_value=5, value= 1,                  
-                    label_visibility="visible")
-results = requests.get(f'http://api:4000/a/advertisers/adinfo/{num}').json()
+id = st.session_state['id']
+results = requests.get(f'http://api:4000/a/advertisers/adinfo/{id}').json()
 st.table(results)
 
 
 st.write("### Want the information about a specific ad?")
 num = st.number_input('Ad ID', min_value=1, max_value=10, value= 1,                  
                     label_visibility="visible")
-results = requests.get(f'http://api:4000/a/advertisers/adinfospecific/{num}').json()
+results = requests.get(f'http://api:4000/a/advertisers/adinfospecific/{id}/{num}').json()
 st.table(results)

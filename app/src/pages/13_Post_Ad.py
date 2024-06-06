@@ -8,9 +8,7 @@ import requests
 
 st.write("### Post an ad:")
 
-adver_id = st.selectbox('Advertiser Id', 
-                       options= (1, 2, 3, 4, 5),                  
-                    label_visibility="visible")
+adver_id = st.session_state['id']
 date = st.date_input('Date Posted',                  
                     label_visibility="visible")
     

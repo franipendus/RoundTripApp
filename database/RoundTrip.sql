@@ -263,7 +263,8 @@ DROP TABLE IF EXISTS main_df;
 CREATE TABLE IF NOT EXISTS main_df
 (
     num                 BIGINT,
-    city_orgin          VARCHAR(255),
+    Unnamed             BIGINT,
+    city_origin          VARCHAR(255),
     city_destination    VARCHAR(255),
     destination_country VARCHAR(255),
     quarter             VARCHAR(255),
@@ -271,5 +272,36 @@ CREATE TABLE IF NOT EXISTS main_df
     hotel_price         DOUBLE,
     flight_price        DOUBLE,
     gdp                 DOUBLE,
+    city_origin_Madrid INT,
+    city_origin_Paris INT,
+    city_origin_Rome INT,
+    city_destination_Madrid INT,
+    city_destination_Paris INT,
+    city_destination_Rome INT,
+    quarter_Q2 INT,
+    quarter_Q3 INT,
+    quarter_Q4 INT,
+
     PRIMARY KEY (num)
+);
+
+DROP TABLE IF EXISTS hotel_params;
+CREATE TABLE IF NOT EXISTS hotel_params
+(
+    row_num INT NOT NULL,
+    intercept          FLOAT,
+    slope1          FLOAT,
+    slope2          FLOAT,
+    slope3          FLOAT,
+    slope4         FLOAT,
+    slope5          FLOAT,
+    slope6         FLOAT,
+    slope7          FLOAT,
+    slope8          FLOAT,
+    slope9          FLOAT,
+    slope10          FLOAT,
+    slope11          FLOAT,
+    slope12         FLOAT,
+
+    PRIMARY KEY (row_num)
 );

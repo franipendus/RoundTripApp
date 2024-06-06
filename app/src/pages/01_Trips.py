@@ -23,8 +23,7 @@ st.write(f"### Hi, {st.session_state['first_name']}.")
 # add a button to use the values entered into the number field to send to the 
 # prediction function via the REST API
 st.write("### Your trips:")
-num = st.number_input('Traveler ID', min_value=1, max_value=50, value= 1,                  
-                    label_visibility="visible")
+num = st.session_state['id']
 results = requests.get(f'http://api:4000/t/travelers/trips/{num}').json()
 st.dataframe(results)
 

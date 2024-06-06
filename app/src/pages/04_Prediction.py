@@ -48,15 +48,19 @@ logger.info(f'var_02 = {var_02}')
 if st.button('Calculate Prediction',
              type='primary',
              use_container_width=True):
-  query = f'http://api:4000/p/ml_models/1/{var_01}/{var_02}/{var_03}/{var_04}/{var_05}'
-  logger.info(f'query = {query}')
-  results = requests.get(query)
-  logger.info(f'results = {results}')
-  
-  st.write('### Predicted hotel cost:')
-  st.metric("cost per night", results.json(), delta=None, delta_color="normal", help=None, label_visibility="visible")
 
-  #st.dataframe(results.json()) 
+  # submitting the query to get the prediction
+  query = f'http://api:4000/p/ml_models/1/{var_01}/{var_02}/{var_03}/{var_04}/{var_05}'
+  
+  # converting the query result to a rounded float
+  results = requests.get(query).json()
+  cost = float(results["result"]).__round__(2)
+  
+  # display the result from the query 
+  st.write('### Predicted hotel cost:')
+  st.metric("US $$$", str(cost), delta=None, delta_color="normal", help=None, label_visibility="visible")
+
+
 
 
 
