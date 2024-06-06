@@ -14,7 +14,6 @@ st.title('RoundTrip')
 
 st.write('\n\n')
 st.write('## Hi! Welcome to our app!')
-st.write('about description goes here')
 st.write("#### Please chose which user would you like to log in as:")
 
 if st.button("Act as Maria, a Traveler", 

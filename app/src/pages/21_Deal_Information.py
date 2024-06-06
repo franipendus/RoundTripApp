@@ -8,11 +8,11 @@ SideBarLinks()
 
 st.title('Deal Information')
 
-if st.button('Post a Deal'):
-    st.switch_page('pages/23_Post_Deal.py')
+# if st.button('Post a Deal'):
+#     st.switch_page('pages/23_Post_Deal.py')
 
-if st.button('Delete an Deal'):
-    st.switch_page('pages/24_Delete_Deal.py')
+# if st.button('Delete an Deal'):
+#     st.switch_page('pages/24_Delete_Deal.py')
 
 st.write("### Your deals:")
 num = st.number_input('Deal Administrator ID', min_value=1, max_value=50, value= 1,                  
