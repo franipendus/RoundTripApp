@@ -30,22 +30,6 @@ CREATE TABLE IF NOT EXISTS countries
     PRIMARY KEY (name)
 );
 
-DROP TABLE IF EXISTS exchangeRates;
-CREATE TABLE IF NOT EXISTS exchangeRates
-(
-    name_to       VARCHAR(255)  NOT NULL,
-    name_from     VARCHAR(255)  NOT NULL,
-    exchange_rate FLOAT               NOT NULL,
-
-    PRIMARY KEY (name_to, name_from),
-    FOREIGN KEY (name_to) REFERENCES countries (name)
-        ON UPDATE cascade
-        ON DELETE cascade,
-    FOREIGN KEY (name_from) REFERENCES countries (name)
-        ON UPDATE cascade
-        ON DELETE cascade
-);
-
 DROP TABLE IF EXISTS airports;
 CREATE TABLE IF NOT EXISTS airports
 (
