@@ -10,7 +10,7 @@ As a traveler, RoundTrip empowers you to effortlessly store and access informati
 - ***Advertise:*** As a hotel or airline, get your promotions out there to customers!
 
 ### Prerequisites 
-To run our app, you’ll need a Docker desktop and a Python editing environment. Before installing Docker, you may need to install Homebrew. 
+To run our app, you’ll need a Docker desktop and a Python editing environment. Before installing Docker, you will need to install Homebrew. 
 
 ### Opening RoundTrip: 
 Open your terminal and run the following commands:
@@ -18,13 +18,15 @@ Open your terminal and run the following commands:
 Commands to run
 ```
 ### Future of RoundTrip
-One of our biggest challenges was the lack of data availability. We originally planned to include 100+ countries that users can travel between. That being said, although right now, there is limited availability for which countries travelers can travel between, we hope to include more countries when data becomes more available. In addition, when data becomes more abundant with time, we hope our prediction models will become more accurate. 
+One of our biggest challenges was the lack of data availability. We originally planned to include 100+ countries that users can travel between. That being said, although right now, there is limited availability for which countries travelers can travel between, we hope to include more countries when more data becomes available. In addition, when data becomes more abundant with time, we hope our prediction models will become more accurate. 
 
-***Our Team:***
+**Our Team:**
 | Frani Pendus    | https://github.com/franipendus    |
 |-----------------|-----------------------------------|
 | **Erica Indman**    | **https://github.com/erica-iii**      |
 | **Nalika Palayoor** | **https://github.com/nalikapalayoor** |
+
+
 
 
 
