@@ -73,7 +73,7 @@ def get_adImpsTrav(traveler_id, advertiser_id):
     
     cursor = db.get_db().cursor()
     cursor.execute(f"""select adInfo.id as 'Ad ID', adImpressions.date as 'Date Interacted', 
-                   title as 'Title', description as 'Description' 
+                   title as 'Title', description as 'Description', clicked as 'Clicked'
        from adImpressions JOIN adInfo ON adImpressions.ad_id = adInfo.id WHERE traveler_id = {traveler_id}
         AND adInfo.advertiser_id = {advertiser_id}""") 
 
