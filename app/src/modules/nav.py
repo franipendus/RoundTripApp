@@ -23,7 +23,8 @@ def PromosNav():
     st.sidebar.page_link("pages/03_Promotions.py", label="Promotions", icon='💲')
 
 def CostPred():
-    st.sidebar.page_link("pages/04_Prediction.py", label="Predictions", icon='🔮')
+    st.sidebar.page_link("pages/04_Prediction_hotels.py", label="Hotel Predictions", icon='🔮')
+    st.sidebar.page_link("pages/04_Prediction_flights.py", label="Flight Predictions", icon='🔮')
 
 ## ------------------------ Examples for Role of advertisers ------------------------
 def AdInfoNav():

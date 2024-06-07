@@ -305,3 +305,24 @@ CREATE TABLE IF NOT EXISTS hotel_params
 
     PRIMARY KEY (row_num)
 );
+
+DROP TABLE IF EXISTS flight_params;
+CREATE TABLE IF NOT EXISTS flight_params
+(
+    row_num INT NOT NULL,
+    intercept          FLOAT,
+    slope1          FLOAT,
+    slope2          FLOAT,
+    slope3          FLOAT,
+    slope4         FLOAT,
+    slope5          FLOAT,
+    slope6         FLOAT,
+    slope7          FLOAT,
+    slope8          FLOAT,
+    slope9          FLOAT,
+    slope10          FLOAT,
+    slope11          FLOAT,
+    slope12         FLOAT,
+
+    PRIMARY KEY (row_num)
+);

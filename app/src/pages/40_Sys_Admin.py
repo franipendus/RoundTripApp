@@ -19,7 +19,18 @@ if st.button('Model 1'):
     pre_results = requests.get(f'http://api:4000/p/ml_models/1')
     logger.info(f'res = {pre_results}')
     #results = pre_results.json()
-    st.write(pre_results)
+    if pre_results.status_code == 200:
+        st.write('Model 1 trained: success :)')
+    else:
+        st.write('Model 1 trained: failed :(')
+
+if st.button('Model 2'):
+    pre_results = requests.get(f'http://api:4000/p/ml_models/2')
+    logger.info(f'res = {pre_results}')
+    if pre_results.status_code == 200:
+        st.write('Model 2 trained: success :)')
+    else:
+        st.write('Model 2 trained: failed :(')
 
 if st.button("Home"):
         st.switch_page('Home.py')
