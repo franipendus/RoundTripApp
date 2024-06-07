@@ -11,6 +11,7 @@ st.write("### Select an ad to view impressions:")
 id = st.session_state['id']
 num = st.number_input('Ad ID', min_value=1, max_value=10, value= 1,                  
                     label_visibility="visible")
+
 results = requests.get(f'http://api:4000/a/advertisers/adimp/{id}/{num}').json()
 st.table(results)
 

@@ -8,7 +8,7 @@ from backend.db_connection import db
 
 travelers = Blueprint('travelers', __name__)
 
-# Get all customers from the DB
+# Get all trips for a spceific traveler
 @travelers.route('/travelers/trips/<traveler_id>', methods=['GET'])
 def get_trips(traveler_id):
     current_app.logger.info('travelers_routes.py: GET /travelers/trips/<traveler_id>')
@@ -33,6 +33,7 @@ where  hotels.id = t3.hi AND t3.ti = {traveler_id}""")
     the_response.mimetype = 'application/json'
     return the_response
 
+# updates a trip for a specific traveler 
 @travelers.route('/travelers/trips', methods=['PUT'])
 def update_trips():
     current_app.logger.info('PUT /travelers/trips')
@@ -49,7 +50,7 @@ def update_trips():
     db.get_db().commit()
     return 'Trips updated!'
 
-# Get customer detail for customer with particular userID
+# Get information about a spceific country
 @travelers.route('/travelers/countries/<country>', methods=['GET'])
 def get_country(country):
     current_app.logger.info('GET /travelers/countries/<country> route')
@@ -66,7 +67,7 @@ def get_country(country):
     return the_response
 
 
-# Get customer detail for customer with particular userID
+# Get all promotions in a specific city 
 @travelers.route('/travelers/promotions/<city>', methods=['GET'])
 def get_promos(city):
     current_app.logger.info('GET /travelers/promotions/<city> route')
@@ -86,10 +87,9 @@ where hotels.id = dealInfo.hotel_id and city = '{city}'""")
     the_response.mimetype = 'application/json'
     return the_response
 
-
+# gets all favorite hotels in a specific city for a specific traveler
 @travelers.route('/travelers/favhotels/<city>/<traveler_id>', methods=['GET'])
 def get_favHotels(city, traveler_id):
-    current_app.logger.info('GET /travelers/favhotels/<city>/<traveler_id> route')
     cursor = db.get_db().cursor()
     cursor.execute( f""" select distinct hotels.id as 'Hotel ID', name  as 'Name',
     number_rooms  as 'Number of Rooms',
@@ -100,10 +100,8 @@ def get_favHotels(city, traveler_id):
                    where favHotels.hotel_id = hotels.id 
                    AND hotels.city = '{city}'
                     AND favHotels.traveler_id = '{traveler_id}'""")
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
+
     theData = cursor.fetchall()
-    current_app.logger.info(f'theData = {theData}')
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'

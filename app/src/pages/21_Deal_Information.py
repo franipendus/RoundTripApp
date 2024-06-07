@@ -8,12 +8,6 @@ SideBarLinks()
 
 st.title('Deal Information')
 
-# if st.button('Post a Deal'):
-#     st.switch_page('pages/23_Post_Deal.py')
-
-# if st.button('Delete an Deal'):
-#     st.switch_page('pages/24_Delete_Deal.py')
-
 st.write("### Your deals:")
 id = st.session_state['id']
 results = requests.get(f'http://api:4000/d/dealadmin/deals/{id}').json()
@@ -21,7 +15,17 @@ st.table(results)
 
 
 st.write("### Want the deal information about a specific hotel?")
-num = st.number_input('Hotel ID', min_value=1, max_value=20, value= 1,                  
+options = requests.get(f'http://api:4000/d/hotelids/{id}').json()
+
+ids = []
+
+for i in options:
+    ids.append(int(i['Hotel ID'])) 
+
+
+hotel = st.selectbox('Hotel ID', 
+                       ids,                  
                     label_visibility="visible")
-results = requests.get(f'http://api:4000/d/dealadmin/dealinfospecific/{id}/{num}').json()
+
+results = requests.get(f'http://api:4000/d/dealadmin/dealinfospecific/{id}/{hotel}').json()
 st.table(results)

@@ -8,13 +8,11 @@ from backend.db_connection import db
 
 advertisers = Blueprint('advertisers', __name__)
 
-# Get all customers from the DB
+# Get all ad information posted by a specific advertiser
 @advertisers.route('/advertisers/adinfo/<advertiser_id>', methods=['GET'])
 def get_ads(advertiser_id):
-    current_app.logger.info('advertisers_routes.py: GET /advertisers/adinfo/<advertiser_id>')
-   
     cursor = db.get_db().cursor()
-    cursor.execute(f"""select id as 'Ad ID', date as 'Date', title as 'Title', description as 'Description', price as 'Price'
+    cursor.execute(f"""select id as 'Ad ID', title as 'Title'
                    from adInfo where advertiser_id = {advertiser_id}""") 
 
     theData = cursor.fetchall()
@@ -23,13 +21,25 @@ def get_ads(advertiser_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# gets all ad ids made by a specific advertiser
+@advertisers.route('/advertisers/adids/<adver_id>', methods=['GET'])
+def get_ad_ids(adver_id):
+    cursor = db.get_db().cursor()
+    cursor.execute(f"""select id as 'Ad ID' from adInfo where advertiser_id = {adver_id}""") 
 
+    theData = cursor.fetchall()
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+
+# Get specific ad information posted by a specific advertiser
 @advertisers.route('/advertisers/adinfospecific/<advertiser_id>/<ad_id>', methods=['GET'])
 def get_ad_specific(ad_id, advertiser_id):
-    current_app.logger.info('advertisers_routes.py: GET /advertisers/adinfospecific/<advertiser_id>/<ad_id>')
-   
     cursor = db.get_db().cursor()
-    cursor.execute(f"""select date as 'Date', title as 'Title', description as 'Description', price as 'Price'
+    cursor.execute(f"""select distinct date as 'Date', title as 'Title', description as 'Description', price as 'Price'
                    from adInfo JOIN advertisers where adInfo.id = {ad_id} AND advertiser_id = {advertiser_id}""") 
 
     theData = cursor.fetchall()
@@ -39,10 +49,10 @@ def get_ad_specific(ad_id, advertiser_id):
     return the_response
 
 
+# Get all ad impressioms of a specific ad and posted by a specific advertiser
 @advertisers.route('/advertisers/adimp/<advertiser_id>/<ad_id>', methods=['GET'])
 def get_adImps(ad_id, advertiser_id):
-    current_app.logger.info('advertisers_routes.py: GET /advertisers/adimp/<advertiser_id>/<ad_id>')
-   
+    
     cursor = db.get_db().cursor()
     cursor.execute(f"""select adImpressions.date as 'Date',  
     clicked  as   'Clicked',
@@ -57,10 +67,10 @@ def get_adImps(ad_id, advertiser_id):
     return the_response
 
 
+# Get all ad impressioms made by a specific traveler and posted by a specific advertiser
 @advertisers.route('/advertisers/adimp/trav/<advertiser_id>/<traveler_id>', methods=['GET'])
 def get_adImpsTrav(traveler_id, advertiser_id):
-    current_app.logger.info('advertisers_routes.py: GET /advertisers/adimp/trav/<traveler_id>')
-   
+    
     cursor = db.get_db().cursor()
     cursor.execute(f"""select adInfo.id as 'Ad ID', adImpressions.date as 'Date Interacted', 
                    title as 'Title', description as 'Description' 
@@ -74,19 +84,18 @@ def get_adImpsTrav(traveler_id, advertiser_id):
     return the_response
 
 
-
-
+# Posts a new ad for a specific advertiser 
 @advertisers.route('/advertisers/adinfo', methods=['POST'])
 def add_new_ad():
     
     # collecting data from the request object 
     the_data = request.json
-    current_app.logger.info(the_data)
 
     #extracting the variable
     cursor = db.get_db().cursor()
-    cursor.execute("SELECT MAX(id) FROM adInfo")
-    max_id = cursor.fetchone()[0]
+    cursor.execute("SELECT MAX(id) as 'id' FROM adInfo")
+    max_id = cursor.fetchone()['id']
+    
     if max_id is None:
         max_id = 0
     id = max_id + 1
@@ -108,16 +117,13 @@ def add_new_ad():
     
     return 'Success!'
 
-
+# Deletes a specific ad made by a specific advertiser 
 @advertisers.route('/advertisers/adinfo/<ad_id>', methods=['DELETE'])
 def delete_ad(ad_id):
-    current_app.logger.info(f'Deleting adinfo with adID {ad_id}')
-    
     cursor = db.get_db().cursor()
     
     # Execute the DELETE statement
     cursor.execute(f"DELETE FROM adInfo WHERE id = {ad_id}") 
-    
     db.get_db().commit()
     
     return "success"

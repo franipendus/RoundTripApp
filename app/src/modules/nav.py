@@ -32,11 +32,19 @@ def AdInfoNav():
 def AdImpNav():
     st.sidebar.page_link("pages/12_Ad_Impressions.py", label="Ad Impressions", icon='📈')
 
-#### ------------------------ System Admin Role ------------------------
+def AdPost():
+    st.sidebar.page_link("pages/13_Post_Ad.py", label="Post an Ad", icon='📋')
+
+def AdDelete():
+    st.sidebar.page_link("pages/14_Delete_Ad.py", label="Delete an Ad", icon='❌')
+
+#### ------------------------ Deal Admin Role ------------------------
 def DealAdminNav():
-   # st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon='🖥️')
     st.sidebar.page_link("pages/21_Deal_Information.py", label='Deal Information', icon='🏨')
     st.sidebar.page_link("pages/22_Deal_Impressions.py", label='Deal Impressions', icon='📈')
+    st.sidebar.page_link("pages/23_Post_Deal.py", label="Post a Deal", icon='📋')
+    st.sidebar.page_link("pages/24_Delete_Deal.py", label="Delete a Deal", icon='❌')
+
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -72,6 +80,9 @@ def SideBarLinks(show_home=False):
         if st.session_state['role'] == 'advertiser':
             AdInfoNav()
             AdImpNav() 
+            AdPost()
+            AdDelete()
+
         
         # If the user is a deal administrator
         if st.session_state['role'] == 'deal_admin':

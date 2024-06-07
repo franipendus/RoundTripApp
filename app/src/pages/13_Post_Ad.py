@@ -5,10 +5,16 @@ from sklearn.ensemble import RandomForestClassifier
 from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
 import requests
+import logging
+
+logger = logging.getLogger()
+SideBarLinks()
 
 st.write("### Post an ad:")
 
 adver_id = st.session_state['id']
+
+
 date = st.date_input('Date Posted',                  
                     label_visibility="visible")
     

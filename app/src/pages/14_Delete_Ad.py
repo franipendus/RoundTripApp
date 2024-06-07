@@ -6,8 +6,25 @@ from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
 import requests
 
+# Display the appropriate sidebar links for the role of the logged in user
+SideBarLinks()
+
 st.write("### Delete an ad:")
-ad_id = st.number_input('Ad ID', min_value=1, max_value=10, value=1,                  
+
+# help with this
+adver_id = st.session_state['id']
+
+
+options = requests.get(f'http://api:4000/a/advertisers/adids/{adver_id}').json()
+
+ids = []
+
+for i in options:
+    ids.append(int(i['Ad ID'])) 
+
+
+ad_id = st.selectbox('Ad ID', 
+                       ids,                  
                     label_visibility="visible")
 
 if st.button("Delete", 

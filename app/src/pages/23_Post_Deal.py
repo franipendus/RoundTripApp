@@ -6,33 +6,55 @@ from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
 import requests
 
+SideBarLinks()
+
 st.write("### Post a deal:")
 
-adver_id = st.selectbox('Advertiser Id', 
-                       options= (1, 2, 3, 4, 5),                  
+admin = st.session_state['id']
+
+date = st.date_input('Date of Deal',                  
                     label_visibility="visible")
-date = st.date_input('Date Posted',                  
+
+deal_name = st.text_input('Deal Name',           
                     label_visibility="visible")
     
-description = st.text_area('Ad Description',           
-                    label_visibility="visible")
-price = st.number_input('Price', min_value=0.0, max_value=250.0,             
-                    label_visibility="visible")
-title = st.text_input('Ad Title',           
+description = st.text_area('Deal Description',           
                     label_visibility="visible")
 
-info = {'date': date, 
-        'adver_id' : adver_id, 
+city = st.selectbox('Deal City', 
+                       ('Rome', 'Mardid', 'London', 'Paris'),                  
+                    label_visibility="visible")
+
+hotel_name = st.selectbox('Hotel Name', 
+                       ('Hyatt', 'Hilton', 'Marriott', 'Four Seasons'),                  
+                    label_visibility="visible")
+
+hotel_id_options = requests.get(f'http://api:4000/d/hotelids/{hotel_name}/{city}').json()
+
+hotel_list_ids = []
+
+for i in hotel_id_options:
+    hotel_list_ids.append(int(i['Hotel ID'])) 
+
+
+hotel_id = st.selectbox('Hotel ID', 
+                       hotel_list_ids,                  
+                    label_visibility="visible")
+
+info = {'date': date.strftime('%Y-%m-%d'), 
+        'hotel_id' : hotel_id, 
         'description': description, 
-        'price' : price, 
-        'title' : title}
-url = f'http://api:4000/a/advertisers/adinfo'
+        'city' : city, 
+        'admin' : admin,
+        'hotel_name' : hotel_name,
+        'deal_name': deal_name}
+url = f'http://api:4000/d/post'
 
 if st.button('Submit'):
-    res = requests.post(url, data = info)
+    res = requests.post(url, json = info)
     if res.status_code == requests.codes.ok:
-        st.write('Ad added!')
+        st.write('Deal added!')
     print(res.text)
 
 if st.button('Return home'):
-    st.switch_page('pages/10_Advertiser_Home.py')
+    st.switch_page('pages/Deal_Administrator_Home.py')

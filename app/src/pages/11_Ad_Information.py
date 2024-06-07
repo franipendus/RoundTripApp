@@ -11,11 +11,6 @@ st.set_page_config(layout = 'wide')
 SideBarLinks()
 
 st.title('Ad Information')
-if st.button('Post an Ad'):
-    st.switch_page('pages/13_Post_Ad.py')
-
-if st.button('Delete an Ad'):
-    st.switch_page('pages/14_Delete_Ad.py')
 
 st.write("### Your ads:")
 id = st.session_state['id']
@@ -24,7 +19,19 @@ st.table(results)
 
 
 st.write("### Want the information about a specific ad?")
-num = st.number_input('Ad ID', min_value=1, max_value=10, value= 1,                  
+options = requests.get(f'http://api:4000/a/advertisers/adids/{id}').json()
+
+ids = []
+
+for i in options:
+    ids.append(int(i['Ad ID'])) 
+
+
+num = st.selectbox('Ad ID', 
+                       ids,                  
                     label_visibility="visible")
+
+
+
 results = requests.get(f'http://api:4000/a/advertisers/adinfospecific/{id}/{num}').json()
 st.table(results)
