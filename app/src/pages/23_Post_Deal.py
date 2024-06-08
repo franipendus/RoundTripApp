@@ -51,7 +51,7 @@ info = {'date': date.strftime('%Y-%m-%d'),
         'deal_name': deal_name}
 url = f'http://api:4000/d/post'
 
-if st.button('Submit'):
+if st.button('Submit', type = 'primary', use_container_width=True):
     res = requests.post(url, json = info)
     if res.status_code == requests.codes.ok:
         st.write('Deal added!')

@@ -25,15 +25,15 @@ st.markdown(f"- view hotel and flight cost predictions")
 
 # creates buttons and allows user to pick a page 
 st.write('#### What you would like to do today?')
-if st.button('Trips ✈️'):
+if st.button('Trips ✈️', type = 'primary', use_container_width=True):
     st.switch_page('pages/01_Trips.py')
-if st.button('Country Information 🗺️'):
+if st.button('Country Information 🗺️', type = 'primary', use_container_width=True):
     st.switch_page('pages/02_Countries.py')
-if st.button('Hotel Promotions 💲'):
+if st.button('Hotel Promotions 💲', type = 'primary', use_container_width=True):
     st.switch_page('pages/03_Promotions.py')
-if st.button('Flight Predictions'):
-    st.switch_page('pages/04_Prediction_flights.py')
-if st.button('Hotel Predictions'):
+if st.button('Hotel Predictions 🔮', type = 'primary', use_container_width=True):
     st.switch_page('pages/04_Prediction_hotels.py')
+if st.button('Flight Predictions 🔮', type = 'primary', use_container_width=True):
+    st.switch_page('pages/04_Prediction_flights.py')    
 
 

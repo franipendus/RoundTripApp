@@ -18,7 +18,7 @@ st.write('')
 
 # allows admin to pick an ml model and train it
 st.write("### Train an ML Model:")
-if st.button('Model 1'):
+if st.button('Model 1', type = 'primary', use_container_width=True):
     pre_results = requests.get(f'http://api:4000/p/ml_models/1')
     logger.info(f'res = {pre_results}')
     if pre_results.status_code == 200:
@@ -26,7 +26,7 @@ if st.button('Model 1'):
     else:
         st.write('Model 1 trained: failed :(')
 
-if st.button('Model 2'):
+if st.button('Model 2', type = 'primary', use_container_width=True):
     pre_results = requests.get(f'http://api:4000/p/ml_models/2')
     logger.info(f'res = {pre_results}')
     if pre_results.status_code == 200:

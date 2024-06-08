@@ -34,7 +34,7 @@ info = {
 }
 url = f'http://api:4000/a/advertisers/adinfo'
 
-if st.button('Submit'):
+if st.button('Submit', type = 'primary', use_container_width=True):
     res = requests.post(url, json=info)
     if res.status_code == requests.codes.ok:
         st.write('Ad added!')

@@ -23,11 +23,11 @@ st.markdown("- post/delete a deal")
   
 # creates buttons and allows user to pick a page 
 st.write('#### What you would like to do today?')
-if st.button('Information 📢'):
+if st.button('Information 📢', type = 'primary', use_container_width=True):
     st.switch_page('pages/21_Deal_Information.py')
-if st.button('Impressions 📈'):
+if st.button('Impressions 📈', type = 'primary', use_container_width=True):
     st.switch_page('pages/22_Deal_Impressions.py')
-if st.button('Post ➕'):
+if st.button('Post ➕', type = 'primary', use_container_width=True):
     st.switch_page('pages/23_Post_Deal.py')
-if st.button('Delete ❌'):
+if st.button('Delete ❌', type = 'primary', use_container_width=True):
     st.switch_page('pages/24_Delete_Deal.py')
