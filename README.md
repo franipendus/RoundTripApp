@@ -21,8 +21,8 @@ Commands to run
 One of our biggest challenges was the lack of data availability. We originally planned to include 100+ countries that users can travel between. That being said, although right now, there is limited availability for which countries travelers can travel between, we hope to include more countries when more data becomes available. In addition, when data becomes more abundant with time, we hope our prediction models will become more accurate. 
 
 **Our Team:**
-| Frani Pendus    | https://github.com/franipendus    |
-|-----------------|-----------------------------------|
+| **Frani Pendus**    | **https://github.com/franipendus**    |
+|---------------------|---------------------------------------|
 | **Erica Indman**    | **https://github.com/erica-iii**      |
 | **Nalika Palayoor** | **https://github.com/nalikapalayoor** |
 
