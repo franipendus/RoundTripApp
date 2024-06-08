@@ -20,7 +20,6 @@ def get_m1(v1,v2, v3, v4, v5):
     # format and return the response
     return_dict = {'result': response}
 
-    #the_response = make_response(jsonify(return_dict))
     the_response = make_response(return_dict)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -45,14 +44,13 @@ def get_m2(v1,v2, v3, v4, v5):
     # format and return the response
     return_dict = {'result': response}
 
-    #the_response = make_response(jsonify(return_dict))
     the_response = make_response(return_dict)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     #return str(the_response)
     return return_dict
 
-# training model 1
+# training model 2
 @ml_models.route('/ml_models/2', methods=['GET'])
 def train_m2():
     # Execute training
