@@ -27,14 +27,43 @@ num = st.session_state['id']
 results = requests.get(f'http://api:4000/t/travelers/trips/{num}').json()
 st.dataframe(results)
 
+# allows a user to get specific information for a specific trip 
+st.write("### Want to view specific trip information?")
+id = st.session_state['id']
+options = requests.get(f'http://api:4000/t/travelers/tripid/{id}').json()
+
+ids = []
+
+for i in options:
+    ids.append(int(i['Id'])) 
+
+trip_id = st.selectbox('Trip ID', 
+                       ids,                  
+                    label_visibility="visible")
+
+results = requests.get(f'http://api:4000/t/travelers/spectrips/{id}/{trip_id}').json()
+st.table(results)
+
 # allows a user to update their trips 
 st.write("### Update a trip:")
-trip_id = st.number_input('Trip ID', min_value=1, max_value=250, value= 1,                  
+id = st.session_state['id']
+options = requests.get(f'http://api:4000/t/travelers/tripid/{id}').json()
+
+ids = []
+
+for i in options:
+    ids.append(int(i['Id'])) 
+
+# error is here with second selectbox
+trip_id = st.selectbox('Trip ID:', 
+                       ids,                  
                     label_visibility="visible")
-sdate = st.date_input('Start Date',                  
+sdate = st.date_input('Start Date:',                  
                     label_visibility="visible")
-edate = st.date_input('End Date',            
+edate = st.date_input('End Date:',            
                     label_visibility="visible")
+
+
 
 stuff = {'s': str(sdate), 'e': str(edate), 'ti' : str(trip_id)}
 if st.button("Submit", 
