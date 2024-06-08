@@ -10,6 +10,8 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
+# allows user to see information about a country 
+
 # add the logo
 add_logo("assets/logo.png", height=400)
 
@@ -20,7 +22,7 @@ st.sidebar.header("Country Info")
 
 st.write("Select a country from the dropdown below to find out more")
 
-
+# provides a list of countries 
 country = st.selectbox('Country', 
                        options= ('France', 'Italy', 'United Kingdom', 'Spain'),
                   
@@ -59,6 +61,7 @@ if country == 'Italy':
      cap = 'Rome'
      lang = 'Bienvenue à Rome, Italie'
 
+# creates a map with user's selected country 
 m = folium.Map(location = loc, zoom_start = 16)
 
 folium.Marker(lm, popup = str, tooltip = str).add_to(m)         

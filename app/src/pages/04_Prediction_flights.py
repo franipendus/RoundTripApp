@@ -12,6 +12,7 @@ st.set_page_config(layout = 'wide')
 # Display the appropriate sidebar links for the role of the logged in user
 SideBarLinks()
 
+# allows a user to predict the cost of their flight 
 st.title('Cost Predictions')
 
 st.write('### Flight Prediction with Regression')
@@ -19,7 +20,7 @@ st.write('### Flight Prediction with Regression')
 # create a 2 column layout
 col1, col2, col3, col4, col5 = st.columns(5)
 
-# add one number input for variable 1 into column 1 flight price
+# add one number input for variable 1 into column 1 hotel price
 with col1:
   var_012 = st.number_input('Hotel Price:',  min_value=0.0)
 

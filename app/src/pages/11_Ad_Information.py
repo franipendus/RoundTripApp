@@ -12,12 +12,13 @@ SideBarLinks()
 
 st.title('Ad Information')
 
+# shows user their posted ads 
 st.write("### Your ads:")
 id = st.session_state['id']
 results = requests.get(f'http://api:4000/a/advertisers/adinfo/{id}').json()
 st.table(results)
 
-
+# shows information about a specific ad for the user 
 st.write("### Want the information about a specific ad?")
 options = requests.get(f'http://api:4000/a/advertisers/adids/{id}').json()
 

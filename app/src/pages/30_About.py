@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
 
+# provides a quick blurb about the app (RoundTrip)
 st.write("# About this App")
 
 st.markdown (

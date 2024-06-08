@@ -8,6 +8,7 @@ import requests
 
 SideBarLinks()
 
+# allows a user to post a deal
 st.write("### Post a deal:")
 
 admin = st.session_state['id']
@@ -56,5 +57,6 @@ if st.button('Submit'):
         st.write('Deal added!')
     print(res.text)
 
+# allows the user to return to the deal admin home page 
 if st.button('Return home'):
     st.switch_page('pages/Deal_Administrator_Home.py')

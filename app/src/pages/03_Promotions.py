@@ -8,6 +8,7 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
+# allows a user to see hotel promotions in a specific city 
 st.write("### Select a city from the dropdown below to learn about hotel deals")
 st.image('assets/hd.png')
 

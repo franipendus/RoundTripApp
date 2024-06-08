@@ -12,6 +12,7 @@ st.set_page_config(layout = 'wide')
 # Display the appropriate sidebar links for the role of the logged in user
 SideBarLinks()
 
+# allows a user to predict hotel costs 
 st.title('Cost Predictions')
 st.write('### Hotel Prediction with Regression')
 

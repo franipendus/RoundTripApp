@@ -8,6 +8,8 @@ import plotly.express as px
 import requests
 from modules.nav import SideBarLinks
 
+# allows a user to see their trips and favorite hotels and update their trips 
+
 # Call the SideBarLinks from the nav module in the modules directory
 SideBarLinks()
 
@@ -19,23 +21,13 @@ st.write(f"### Hi, {st.session_state['first_name']}.")
 
 
 
-
-# add a button to use the values entered into the number field to send to the 
-# prediction function via the REST API
+# gets a users trips 
 st.write("### Your trips:")
 num = st.session_state['id']
 results = requests.get(f'http://api:4000/t/travelers/trips/{num}').json()
 st.dataframe(results)
 
-
-st.write("### Your Favorite Hotels:")
-city = st.selectbox('City', 
-                       options= ('Paris', 'Rome', 'London', 'Madrid'),                  
-                    label_visibility="visible")
-
-results = requests.get(f'http://api:4000/t/travelers/favhotels/{city}/{num}').json()
-st.table(results)
-
+# allows a user to update their trips 
 st.write("### Update a trip:")
 trip_id = st.number_input('Trip ID', min_value=1, max_value=250, value= 1,                  
                     label_visibility="visible")
@@ -54,6 +46,12 @@ if st.button("Submit",
                 st.write('Trip updated!')
         else : st.write('Update failed :( Status Code = ' + str(results.status_code))   
             
+# gets a users favorite hotels based on city 
+st.write("### Your Favorite Hotels:")
+city = st.selectbox('City', 
+                       options= ('Paris', 'Rome', 'London', 'Madrid'),                  
+                    label_visibility="visible")
 
-#st.table(results)
+results = requests.get(f'http://api:4000/t/travelers/favhotels/{city}/{num}').json()
+st.table(results)
 

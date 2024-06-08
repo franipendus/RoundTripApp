@@ -10,10 +10,10 @@ import logging
 logger = logging.getLogger()
 SideBarLinks()
 
+# allows a user to post an ad
 st.write("### Post an ad:")
 
 adver_id = st.session_state['id']
-
 
 date = st.date_input('Date Posted',                  
                     label_visibility="visible")
@@ -40,5 +40,6 @@ if st.button('Submit'):
         st.write('Ad added!')
     print(res.text)
 
+# allows the user to return to the advertiser home page 
 if st.button('Return home'):
     st.switch_page('pages/10_Advertiser_Home.py')

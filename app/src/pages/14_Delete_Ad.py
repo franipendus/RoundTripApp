@@ -9,9 +9,9 @@ import requests
 # Display the appropriate sidebar links for the role of the logged in user
 SideBarLinks()
 
+# allows a user to delete an ad 
 st.write("### Delete an ad:")
 
-# help with this
 adver_id = st.session_state['id']
 
 
@@ -37,6 +37,7 @@ if st.button("Delete",
         st.write('Ad deleted successfully!')
     else:
         st.write(f'Delete failed :( {response.status_code}')
-    
+
+# allows the user to return to the advertiser home page   
 if st.button('Return home'):
     st.switch_page('pages/10_Advertiser_Home.py')

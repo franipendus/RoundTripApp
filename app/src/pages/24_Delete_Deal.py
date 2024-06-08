@@ -9,6 +9,7 @@ import requests
 # Display the appropriate sidebar links for the role of the logged in user
 SideBarLinks()
 
+# allows a user to delete a deal 
 st.write("### Delete a Deal:")
 admin = st.session_state['id']
 
@@ -35,5 +36,6 @@ if st.button("Delete",
     else:
         st.write(f'Delete failed :( {response.status_code}')
 
+# allows the user to return to the deal admin home page 
 if st.button('Return home'):
     st.switch_page('pages/20_Deal_Administrator_Home.py')

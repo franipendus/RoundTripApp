@@ -11,7 +11,7 @@ def AboutPageNav():
 
 #### ------------------------ Examples for Role of travelers ------------------------
 def TravelerHomeNav():
-    st.sidebar.page_link("pages/00_Traveler_Home.py", label="Traveler Home", icon='🏠')
+    st.sidebar.page_link("pages/00_Traveler_Home.py", label="Home", icon='🏠')
 
 def TripsNav():
     st.sidebar.page_link("pages/01_Trips.py", label="Trips", icon='✈️')
@@ -27,6 +27,9 @@ def CostPred():
     st.sidebar.page_link("pages/04_Prediction_flights.py", label="Flight Predictions", icon='🔮')
 
 ## ------------------------ Examples for Role of advertisers ------------------------
+def AdHomeNav():
+    st.sidebar.page_link("pages/10_Advertiser_Home.py", label="Home", icon='🏠')
+
 def AdInfoNav():
     st.sidebar.page_link("pages/11_Ad_Information.py", label="Ad Information", icon='📢')
 
@@ -41,11 +44,11 @@ def AdDelete():
 
 #### ------------------------ Deal Admin Role ------------------------
 def DealAdminNav():
+    st.sidebar.page_link("pages/20_Deal_Administrator_Home.py", label="Home", icon='🏠')
     st.sidebar.page_link("pages/21_Deal_Information.py", label='Deal Information', icon='🏨')
     st.sidebar.page_link("pages/22_Deal_Impressions.py", label='Deal Impressions', icon='📈')
     st.sidebar.page_link("pages/23_Post_Deal.py", label="Post a Deal", icon='📋')
     st.sidebar.page_link("pages/24_Delete_Deal.py", label="Delete a Deal", icon='❌')
-
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -79,6 +82,7 @@ def SideBarLinks(show_home=False):
 
         # If the user role is an advertiser
         if st.session_state['role'] == 'advertiser':
+            AdHomeNav()
             AdInfoNav()
             AdImpNav() 
             AdPost()

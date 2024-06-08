@@ -10,12 +10,14 @@ st.set_page_config(layout = 'wide')
 st.session_state['authenticated'] = False
 SideBarLinks(show_home=True)
 
+# app title and slogan 
 st.title('RoundTrip')
+st.write('## See More For Less 🌎')
 
 st.write('\n\n')
-st.write('## Hi! Welcome to our app!')
 st.write("#### Please chose which user would you like to log in as:")
 
+# buttons to chose user persona
 if st.button("Act as Maria, a Traveler", 
             type = 'primary', 
             use_container_width=True):
