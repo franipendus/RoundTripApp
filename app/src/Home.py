@@ -15,7 +15,7 @@ st.title('RoundTrip')
 st.write('## See More For Less 🌎')
 
 st.write('\n\n')
-st.write("#### Please chose which user would you like to log in as:")
+st.write("#### Please choose which user would you like to log in as:")
 
 # buttons to chose user persona
 if st.button("Act as Maria, a Traveler", 

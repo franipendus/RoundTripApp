@@ -2,7 +2,7 @@
 showSidebarNavigation = false
 
 [theme]
-base="light"
+base="dark"
 primaryColor="#4f7db5"
 font="sans serif"
 
