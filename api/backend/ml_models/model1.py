@@ -98,13 +98,13 @@ def train():
     rows = cursor.fetchall()
     df = pd.DataFrame.from_dict(rows)
     
-#collecting numerical data
+#collecting numerical data into array
     X_num = np.array([df['flight_price'], df['hotel_rating'], df['gdp']])
 
 # standardizing data
     X_stand = (X_num.T - np.mean(X_num.T, axis=0)) / np.std(X_num.T, axis=0)
 
-# making dummies 
+# making dummies array 
     dummies_array = np.array([df['city_origin_Madrid'], df['city_origin_Paris'], df['city_origin_Rome'], df['city_destination_Madrid'], df['city_destination_Paris'], df['city_destination_Rome'], df['quarter_Q2'], df['quarter_Q3'], df['quarter_Q4']]).astype('int')
 
 
@@ -119,7 +119,7 @@ def train():
     train_line = line_of_best_fit(Xtrain, ytrain)
     test_line = linreg_predict(Xtest, ytest, train_line)
 
-# finding line (parameter array) for whole dataset
+# finding line of best fit (parameter array) for whole dataset
     line = line_of_best_fit(X, y)
 
     intercept = line[0]
@@ -136,6 +136,7 @@ def train():
     slope11 = line[11]
     slope12 = line[12]
 
+# storing line of best fit in database
     cursor = db.get_db().cursor()
     cursor.execute(f"""INSERT INTO hotel_params VALUES 
                          ({0}, {intercept}, {slope1}, {slope2},
@@ -157,15 +158,15 @@ def predict(var01, var02, var03, var04, var05):
     rows = cursor.fetchall()
     df = pd.DataFrame.from_dict(rows)
 
-    #gets params for model from db as a dictionary
+    #getting params for model from db as a dictionary
     cursor = db.get_db().cursor()
     cursor.execute(f"""SELECT * from hotel_params""")
     rows_params = cursor.fetchall()
 
-    # changes dictionary to array 
+    # changing dictionary to array 
     params_array = np.array(list(rows_params[0].values())[1:]) 
 
-
+    # finding means and stds for standardization
     mean_flights = np.mean(df['flight_price'])
     std_flights = np.std(df['flight_price'])
     mean_ratings = np.mean(df['hotel_rating'])
@@ -173,10 +174,11 @@ def predict(var01, var02, var03, var04, var05):
     mean_gdp = np.mean(df['gdp'])
     std_gdp = np.std(df['gdp'])
     
-
+    # standardizing
     flight = (float(var01) - mean_flights)/std_flights
     rating = (float(var02)  - mean_ratings)/std_ratings
     
+    # changing user inputs into usable values
     if var03 == 'London':
         co = np.array([0,0,0])
     if var03 == 'Madrid':
@@ -207,12 +209,15 @@ def predict(var01, var02, var03, var04, var05):
         quarter = np.array([0,1,0])
     if var05 in ('October', 'November', 'December'):
         quarter = np.array([0,0,1])
-        
+
+    # standardizing   
     gdp = (gdp - mean_gdp)/std_gdp
 
+    # creating array of converted user inputs 
     numerical_values = np.array([1.0, flight, rating, gdp])
     input_array = np.concatenate((numerical_values, co, cd, quarter))
   
+    # predicting using our line of best fit
     prediction = np.dot(params_array, input_array)
 
     return prediction

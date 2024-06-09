@@ -136,6 +136,7 @@ def train2():
     slope11 = line[11]
     slope12 = line[12]
 
+# storing line of best fit in database
     cursor = db.get_db().cursor()
     cursor.execute(f"""INSERT INTO flight_params VALUES 
                          ({0}, {intercept}, {slope1}, {slope2},
@@ -157,15 +158,15 @@ def predict2(var01, var02, var03, var04, var05):
     rows = cursor.fetchall()
     df = pd.DataFrame.from_dict(rows)
 
-    #gets params for model from db as a dictionary
+    #getting params for model from db as a dictionary
     cursor = db.get_db().cursor()
     cursor.execute(f"""SELECT * from flight_params""")
     rows_params = cursor.fetchall()
 
-    # changes dictionary to array 
+    # changing dictionary to array 
     params_array = np.array(list(rows_params[0].values())[1:]) 
 
-
+    # finding means and stds for standardization
     mean_flights = np.mean(df['hotel_price'])
     std_flights = np.std(df['hotel_price'])
     mean_ratings = np.mean(df['hotel_rating'])
@@ -173,10 +174,11 @@ def predict2(var01, var02, var03, var04, var05):
     mean_gdp = np.mean(df['gdp'])
     std_gdp = np.std(df['gdp'])
     
-
+    # standardizing
     hotel = (float(var01) - mean_flights)/std_flights
     rating = (float(var02)  - mean_ratings)/std_ratings
     
+    # changing user inputs into usable values
     if var03 == 'London':
         co = np.array([0,0,0])
     if var03 == 'Madrid':
@@ -207,12 +209,15 @@ def predict2(var01, var02, var03, var04, var05):
         quarter = np.array([0,1,0])
     if var05 in ('October', 'November', 'December'):
         quarter = np.array([0,0,1])
-        
+
+    # standardizing   
     gdp = (gdp - mean_gdp)/std_gdp
 
+    # creating array of converted user inputs 
     numerical_values = np.array([1.0, hotel, rating, gdp])
     input_array = np.concatenate((numerical_values, co, cd, quarter))
   
+    # predicting using our line of best fit
     prediction = np.dot(params_array, input_array)
 
     return prediction
