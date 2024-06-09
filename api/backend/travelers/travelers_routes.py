@@ -112,8 +112,9 @@ def get_promos(city):
     cursor.execute( f"""select distinct dealInfo.date as 'Date', hotel_name as 'Hotel Name', 
                    dealInfo.name as 'Deal Information',dealInfo.description as 'Deal Description', 
                    amenities as 'Amentities', city as 'City'
-from dealInfo Join hotels
+                   from dealInfo Join hotels
 where hotels.id = dealInfo.hotel_id and city = '{city}'""")
+    
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
