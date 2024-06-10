@@ -59,4 +59,4 @@ if st.button('Submit', type = 'primary', use_container_width=True):
 
 # allows the user to return to the deal admin home page 
 if st.button('Return home'):
-    st.switch_page('pages/Deal_Administrator_Home.py')
+    st.switch_page('pages/20_Deal_Administrator_Home.py')
