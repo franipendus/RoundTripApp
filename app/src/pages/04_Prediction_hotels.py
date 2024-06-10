@@ -59,6 +59,6 @@ if st.button('Calculate Prediction',
   
   # display the result from the query 
   st.write('### Predicted hotel cost:')
-  st.metric("US $$$", str(cost), delta=None, delta_color="normal", help=None, label_visibility="visible")
+  st.metric("US $$$ (per night)", str(cost), delta=None, delta_color="normal", help=None, label_visibility="visible")
 
 
